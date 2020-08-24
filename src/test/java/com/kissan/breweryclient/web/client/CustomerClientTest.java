@@ -1,6 +1,7 @@
 package com.kissan.breweryclient.web.client;
 
 import com.kissan.breweryclient.web.model.v2.BeerDTO;
+import com.kissan.breweryclient.web.model.v2.CustomerDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -14,35 +15,36 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
-class BreweryClientTest {
+class CustomerClientTest {
+
     @Autowired
-    BreweryClient breweryClient;
+    CustomerClient customerClient;
 
     @Test
-    void getBeerById() {
-        BeerDTO beerDTO = breweryClient.getBeerById(UUID.randomUUID());
+    void getCustomerById() {
+        CustomerDTO customerDTO = customerClient.getCustomerById(UUID.randomUUID());
 
-        assertNotNull(beerDTO);
+        assertNotNull(customerDTO);
     }
 
     @Test
-    void addBeer() {
-        BeerDTO beerDTO = BeerDTO.builder().beerName("New Beer").build();
+    void addCustomer() {
+        CustomerDTO customerDTO = CustomerDTO.builder().name("New Customer").build();
 
-        URI uri = breweryClient.addBeer(beerDTO);
+        URI uri = customerClient.addCustomer(customerDTO);
         assertNotNull(uri);
         System.out.println(uri.toString());
     }
 
     @Test
-    void updateBeer() {
-        BeerDTO beerDTO = BeerDTO.builder().beerName("Update Beer").build();
+    void updateCustomer() {
+        CustomerDTO customerDTO = CustomerDTO.builder().name("Update Customer").build();
 
-        breweryClient.updateBeer(UUID.randomUUID(), beerDTO);
+        customerClient.updateCustomer(UUID.randomUUID(), customerDTO);
     }
 
     @Test
-    void deleteBeer() {
-        breweryClient.deleteBeer(UUID.randomUUID());
-     }
+    void deleteCustomer() {
+        customerClient.deleteCustomer(UUID.randomUUID());
+    }
 }
